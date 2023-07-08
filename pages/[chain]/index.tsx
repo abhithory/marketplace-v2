@@ -6,7 +6,7 @@ import {
 } from 'next'
 import { Text, Flex, Box, Button } from 'components/primitives'
 import Layout from 'components/Layout'
-import { ComponentPropsWithoutRef, useContext, useState } from 'react'
+import { ComponentPropsWithoutRef, useContext, useEffect, useState } from 'react'
 import { Footer } from 'components/home/Footer'
 import { useMediaQuery } from 'react-responsive'
 import { useMarketplaceChain, useMounted } from 'hooks'
@@ -56,8 +56,9 @@ const IndexPage: NextPage<Props> = ({ ssr }) => {
   const { data, isValidating } = useCollections(collectionQuery, {
     fallbackData: [ssr.collections[marketplaceChain.id]],
   })
+  // let collections = data || []
 
-  let collections = data || []
+  const [collections, setCollections] = useState(data || []);
 
   let volumeKey: ComponentPropsWithoutRef<
     typeof CollectionRankingsTable
@@ -74,6 +75,18 @@ const IndexPage: NextPage<Props> = ({ ssr }) => {
       volumeKey = '30day'
       break
   }
+
+  useEffect(() => {   
+    console.log("=============================");
+    console.log("isValidating",isValidating);
+    console.log(data);
+    console.log("=============================");
+    if (!isValidating && data) {
+      setCollections(data)
+    }
+     
+  }, [isValidating])
+  
 
   return (
     <Layout>

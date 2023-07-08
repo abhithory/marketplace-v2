@@ -5,7 +5,10 @@ import { ChainContext } from 'context/ChainContextProvider'
 
 export default () => {
   const { chain } = useContext(ChainContext)
-  const router = useRouter()
+  const router = useRouter();
+
+
+  console.log("searching for " + chain.id);
 
   //Detect route chain first
   const routePrefix = router.query.chain
