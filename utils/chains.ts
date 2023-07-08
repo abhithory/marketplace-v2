@@ -1,4 +1,4 @@
-import { arbitrum, mainnet, polygon, optimism, Chain, bsc } from 'wagmi/chains'
+import { arbitrum, mainnet, polygon, optimism, Chain, bsc, goerli} from 'wagmi/chains'
 
 //Chains that are missing from wagmi:
 export const zora = {
@@ -74,6 +74,18 @@ export const DefaultChain: ReservoirChain = {
 
 export default [
   DefaultChain,
+  {
+    ...goerli,
+    lightIconUrl: '/icons/goerli-icon-dark.svg',
+    darkIconUrl: '/icons/goerli-icon-light.svg',
+    reservoirBaseUrl: 'https://api-goerli.reservoir.tools',
+    proxyApi: '/api/reservoir/goerli',
+    routePrefix: 'goerli',
+    apiKey: process.env.GOERLI_RESERVOIR_API_KEY,
+    coingeckoId: 'goerli-network',
+    collectionSetId: process.env.NEXT_PUBLIC_GOERLI_COLLECTION_SET_ID,
+    community: process.env.NEXT_PUBLIC_GOERLI_COMMUNITY,
+  },
   {
     ...polygon,
     lightIconUrl: '/icons/polygon-icon-dark.svg',

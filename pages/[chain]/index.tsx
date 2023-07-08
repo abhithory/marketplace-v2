@@ -77,10 +77,6 @@ const IndexPage: NextPage<Props> = ({ ssr }) => {
   }
 
   useEffect(() => {   
-    console.log("=============================");
-    console.log("isValidating",isValidating);
-    console.log(data);
-    console.log("=============================");
     if (!isValidating && data) {
       setCollections(data)
     }
